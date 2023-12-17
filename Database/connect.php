@@ -1,21 +1,26 @@
-<?php 
-$host = 'localhost';
-$user = 'root';
-$password = '';
-$database = 'manager';
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "manager";
 
-$connection = new mysqli($host, $user, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$query = "SELECT * FROM ticket";
-$result = $connection->query($query);
+$email = $_POST['email'];
+$password = $_POST['password'];
+$confirmPassword = $_POST['confirmPassword'];
 
-while ($row = $result->fetch_assoc()) {
-    print_r($row);
+$sql = "INSERT INTO users (email, password, confirmPassword) VALUES ('$email', '$password', '$confirmPassword')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Data inserted successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-$connection->close();
+$conn->close();
 ?>

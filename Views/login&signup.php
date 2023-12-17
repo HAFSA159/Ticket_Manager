@@ -36,23 +36,24 @@
         Sign Up
         <span class="underline"></span>
       </button>
-      <form class="form form-signup">
+
+      <form class="form form-signup" action="../Database/connect.php" method="POST">
         <fieldset>
           <legend>Please, enter your email, password and password confirmation for sign up.</legend>
           <div class="input-block">
             <label for="signup-email">E-mail</label>
-            <input id="signup-email" type="email" required>
+            <input id="signup-email" name="email" type="email" required>
           </div>
           <div class="input-block">
             <label for="signup-password">Password</label>
-            <input id="signup-password" type="password" required>
+            <input id="signup-password" name="password" type="password" required>
           </div>
           <div class="input-block">
             <label for="signup-password-confirm">Confirm password</label>
-            <input id="signup-password-confirm" type="password" required>
+            <input id="signup-password-confirm" name="confirmPassword" type="password" required>
           </div>
         </fieldset>
-        <button type="submit" class="btn-signup">Continue</button>
+        <button type="submit" name="submit" class="btn-signup">Continue</button>
       </form>
     </div>
   </div>
@@ -66,7 +67,6 @@ switchers.forEach(item => {
 		this.parentElement.classList.add('is-active')
 	})
 })
-
 </script>
 </body>
 </html>
