@@ -1,3 +1,9 @@
+<?php
+require_once("../Database/connect.php");
+$test = new DatabaseConnection();
+$test->createTables();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
