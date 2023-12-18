@@ -1,6 +1,6 @@
 <?php
 
-class DatabaseConnection
+class Database
 {
     private $servername = "localhost";
     private $username = "root";
@@ -24,6 +24,7 @@ class DatabaseConnection
     {
         $this->stmt = $this->dbh->prepare($query);
     }
+
     public function bind($param, $value, $type = null)
     {
         if (is_null($type)) {
@@ -49,25 +50,17 @@ class DatabaseConnection
         return $this->stmt->execute();
     }
 
-    public function escapeString($value)
-    {
-        // Since you are using PDO, there's no need for real_escape_string
-        return $value;
-    }
-
     public function executeQuery($sql)
     {
-        $result = $this->dbh->query($sql);
-
-        // if (!$result) {
-        //     $this->lastError = $this->dbh->errorInfo()[2];
-        // }
-
-        return $result;
+        try {
+            $result = $this->dbh->query($sql);
+            return $result;
+        } catch (PDOException $e) {
+            die("Query failed: " . $e->getMessage());
+        }
     }
-
 }
 
-$connect = new DatabaseConnection();
+$connect = new Database();
 
 ?>

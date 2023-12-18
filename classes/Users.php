@@ -1,7 +1,7 @@
 <?php
-require("../Database/connect.php");
+require "../classes/Database.php";
 
-class Authentification extends DatabaseConnection
+class Users extends Database
 {
     private $userstable = 'Users';
 
@@ -17,18 +17,19 @@ class Authentification extends DatabaseConnection
         $this->execute();
     }
 
-    public function insert($username, $email, $password, $confirm_Password)
+    public function insert($username, $email, $password)
     {
         $this->query("INSERT INTO users (
-            username, email, password, confirm_Password
-        ) VALUE(:username, :email, :password, :confirm_Password);");
+            username, email, password
+        ) VALUE(:username, :email, :password);");
         $this->bind(":username", $username);
         $this->bind(":email", $email);
         $this->bind(":password", $password);
-        $this->bind(":confirm_Password", $confirm_Password);
         $this->execute();
     }
+    
 }
 
-$auth = new Authentification();
+$auth = new Users();
+
 ?>

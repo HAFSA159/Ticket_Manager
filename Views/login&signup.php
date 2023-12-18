@@ -37,7 +37,7 @@
                 <span class="underline"></span>
             </button>
 
-            <form class="form form-signup" action="../Authentif/authentifbackend.php" method="POST">
+            <form class="form form-signup" action="../Authentif/SignupBE.php" method="POST">
                 <fieldset>
                     <legend>Please, enter your email, password and password confirmation for sign up.</legend>
                     <div class="input-block">

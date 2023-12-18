@@ -14,7 +14,7 @@
 <div class="terminal">
   <h1>Error <span class="errorcode">404</span></h1>
   <p class="output">The destination you seek is on this page—savor your ticket.</p>
-  <p class="output">Please try to <a href="./Views/login&signup.php">Take a ticket</a> or <a href="#2">return to the homepage</a>.</p>
+  <p class="output">Please Try To <a href="./Views/login&signup.php">LOGIN</a> to <a href="#2">Submit a Ticket</a>.</p>
   <p class="output">Good luck.</p>
 </div>
   <script defer src="./Public/style.js"></script>
