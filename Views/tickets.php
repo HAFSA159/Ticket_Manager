@@ -43,7 +43,7 @@ Processing Order"><a href="../Views/create">Submit Ticket</a></button>
 <script>
 	$('.btn').on('click', function() {
     var $this = $(this);
-  $this.button('loading');
+    $this.button('loading');
     setTimeout(function() {
        $this.button('reset');
    }, 8000);
@@ -52,8 +52,3 @@ Processing Order"><a href="../Views/create">Submit Ticket</a></button>
 
 </body>
 </html>
-			<!-- <select name="" id="">
-			<option value="done">Done</option>
-            <option value="in_progress">In Progress</option>
-			<option value="to_do">To do</option>
-			</select> -->

@@ -25,29 +25,28 @@
     </div>
     <div class="user-box">
       <label>Status</label>
-        <select name="status">
+        <select  name="status">
+         <option value="" disabled selected></option>
          <option value="todo">To Do</option>
          <option value="InProgress">In Progress</option>
          <option value="Done">Done</option>
         </select>
     </div>   
+    
     <div class="user-box">
-      <input type="text" name="attribute_To" required="">
       <label>Priority</label>
         <select name="priority">
+         <option value="" disabled selected></option>
          <option value="high">High</option>
          <option value="medium">Medium</option>
          <option value="low">Low</option>
         </select>
     </div>
     <div class="user-box">
-      <input type="date" name="date" required="">
-      <label>Ticket Date</label>
+        <label>Ticket Date</label>
+        <option value="" disabled selected></option>
+        <input type="date" name="date" required="">
     </div>
-    
-
-
-
     <a href="#">
       <span></span>
       <span></span>
@@ -56,6 +55,8 @@
       Submit
     </a>
   </form>
+
+
 </div>
 </body>
 </html>
