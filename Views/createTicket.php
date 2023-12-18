@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Public/formticket.css">
 
-    <title>Document</title>
+    <title>Submit a Ticket</title>
 </head>
 <body>
 <div class="login-box">
   <h2>Ticket</h2>
-  <form>
+  <form action="tickets.php" method="post">
     <div class="user-box">
       <input type="text" name="titre" required="">
       <label>Titre</label>
@@ -47,7 +47,7 @@
         <option value="" disabled selected></option>
         <input type="date" name="date" required="">
     </div>
-    <a href="#">
+    <a href="tickets.php">
       <span></span>
       <span></span>
       <span></span>

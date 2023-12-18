@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 include '../classes/Database.php';
@@ -7,11 +7,17 @@ if (isset($_POST['submit'])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $query = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $query); 
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $query = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $user = mysqli_fetch_assoc($result);
+        $user = $result->fetch_assoc();
 
         if (password_verify($password, $user['password'])) {
 
@@ -19,9 +25,11 @@ if (isset($_POST['submit'])) {
             $_SESSION["email"] = $user['email'];
 
             header('location: ../Views/tickets.php');
+            exit();
         }
     }
+
+    $stmt->close();
+    $db->close();
 }
-
-
 ?>
