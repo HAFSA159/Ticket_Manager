@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $auth->insert($username, $email, $hashed_password);
-    header('location: ../Views/tickets.php');
+    header('location: ../Views/login&signup.php');
 }
 
 
