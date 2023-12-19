@@ -44,16 +44,16 @@ h2 a {
 .container th h1 {
 	  font-weight: bold;
 	  font-size: 1em;
-  text-align: left;
-  color: #185875;
+    text-align: left;
+    color: #185875;
 }
 
 .container td {
 	  font-weight: normal;
 	  font-size: 1em;
-  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
-	   -moz-box-shadow: 0 2px 2px -2px #0E1119;
-	        box-shadow: 0 2px 2px -2px #0E1119;
+    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+	  -moz-box-shadow: 0 2px 2px -2px #0E1119;
+    box-shadow: 0 2px 2px -2px #0E1119;
 }
 
 .container {
@@ -71,41 +71,37 @@ h2 a {
   padding-left:2%;  
 }
 
-/* Background-color of the odd rows */
 .container tr:nth-child(odd) {
-	  background-color: #323C50;
+	background-color: #323C50;
 }
 
-/* Background-color of the even rows */
 .container tr:nth-child(even) {
-	  background-color: #2C3446;
+	background-color: #2C3446;
 }
 
 .container th {
-	  background-color: #1F2739;
+	background-color: #1F2739;
 }
 
 .container td:first-child { color: #bababa; }
 
 .container tr:hover {
-   background-color: #464A52;
--webkit-box-shadow: 0 6px 6px -6px #0E1119;
-	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
-	        box-shadow: 0 6px 6px -6px #0E1119;
+  background-color: #464A52;
+  -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	-moz-box-shadow: 0 6px 6px -6px #0E1119;
+	box-shadow: 0 6px 6px -6px #0E1119;
 }
 
 .container td:hover {
-  background-color: #618a5f;
-  color: #ffffff;
-  font-weight: bold;
-  
-  box-shadow: #426841 -1px 1px, #426841 -2px 2px, #426841 -3px 3px, #426841 -4px 4px, #426841 -5px 5px, #426841 -6px 6px;
-  transform: translate3d(6px, -6px, 0);
-  
-  transition-delay: 0s;
-	  transition-duration: 0.4s;
-	  transition-property: all;
-  transition-timing-function: line;
+background-color: #618a5f;
+color: #ffffff;
+font-weight: bold;
+box-shadow: #426841 -1px 1px, #426841 -2px 2px, #426841 -3px 3px, #426841 -4px 4px, #426841 -5px 5px, #426841 -6px 6px;
+transform: translate3d(6px, -6px, 0);
+transition-delay: 0s;
+transition-duration: 0.4s;
+transition-property: all;
+transition-timing-function: line;
 }
 
 @media (max-width: 800px) {
@@ -144,3 +140,15 @@ button {
   background: #57ac54;
   background: linear-gradient(0deg, #57ac54 0%, #57ac54 100%);
   }
+  
+    .status-done {
+        color: green;
+    }
+
+    .status-todo {
+        color: red;
+    }
+
+    .status-in-process {
+        color: orange;
+    }

@@ -10,7 +10,8 @@
 <body>
 <div class="login-box">
   <h2>Ticket</h2>
-  <form action="tickets.php" method="post">
+
+  <form action="../Authentif/TicketBE.php" method="post">
     <div class="user-box">
       <input type="text" name="titre" required="">
       <label>Titre</label>
@@ -23,23 +24,23 @@
       <input type="text" name="attribute_To" required="">
       <label>Attribute To</label>
     </div>
-    <div class="user-box">
-      <label>Status</label>
+    <div>
+      <label style="color: white;">Status</label>
         <select  name="status">
          <option value="" disabled selected></option>
-         <option value="todo">To Do</option>
-         <option value="InProgress">In Progress</option>
-         <option value="Done">Done</option>
+         <option value="todo" style="background-color: red;">To Do</option>
+         <option value="InProgress" style="background-color: orange;">In Progress</option>
+         <option value="Done" style="background-color: green;">Done</option>
         </select>
     </div>   
     
-    <div class="user-box">
-      <label>Priority</label>
+    <div>
+      <label style="color: white;">Priority</label>
         <select name="priority">
          <option value="" disabled selected></option>
-         <option value="high">High</option>
-         <option value="medium">Medium</option>
-         <option value="low">Low</option>
+         <option value="high" style="background-color: red;">High</option>
+         <option value="medium" style="background-color: orange;">>Medium</option>
+         <option value="low" style="background-color: green;">>Low</option>
         </select>
     </div>
     <div class="user-box">
@@ -52,7 +53,7 @@
       <span></span>
       <span></span>
       <span></span>
-      Submit
+      <input type="submit" name="submit" value="Submit" style="background: none; text-decoration:none; border:none; color:white;">
     </a>
   </form>
 

@@ -5,7 +5,7 @@ class Database {
     private $username = 'root';
     private $password = '';
     private $database = 'manager';
-    private $connection;
+    public $connection;
 
     public function __construct() {
         $this->connection = new mysqli($this->host, $this->username, $this->password, $this->database);
@@ -13,9 +13,6 @@ class Database {
         if ($this->connection->connect_error) {
             die("Connection failed: " . $this->connection->connect_error);
         }
-    }
-    public function getConnection() {
-        return $this->connection;
     }
 
     public function query($sql) {
@@ -25,5 +22,7 @@ class Database {
     public function close() {
         $this->connection->close();
     }
+    
+    
 }
-?>
+

@@ -1,52 +1,6 @@
 <?php 
-include '../classes/Database.php';
-
-class DataManager {
-    private $db;
-
-    public function __construct() {
-        $this->db = new Database(); 
-    }
-
-    public function getAllData() {
-        $sql = "SELECT * FROM tickets";
-        $result = $this->db->query($sql);
-
-        $data = [];
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
-        }
-
-        return $data;
-    }
-
-    public function displayDataInTable($data) {
-        foreach ($data as $row) {
-            echo '<tr>';
-            echo '<td>' . $row['titre'] . '</td>';
-            echo '<td>' . $row['description'] . '</td>';
-            echo '<td>' . $row['attribute_To'] . '</td>';
-            echo '<td>' . $row['status'] . '</td>';
-            echo '<td>' . $row['priority'] . '</td>';
-            echo '<td>' . $row['ticket_date'] . '</td>';
-            echo '</tr>';
-        }
-    }
-
-    public function closeConnection() {
-        $this->db->close();
-    }
-}
-
-$dataManager = new DataManager();
-$data = $dataManager->getAllData(); 
-$dataManager->closeConnection();
-
+include '../Authentif/TicketBE.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,9 +15,9 @@ $dataManager->closeConnection();
 <body>
 
 <div class="frame">
-  <button class="custom-btn btn-1"><a href="createTicket.php">Submit Ticket</a></button> 
-
-<h1><span class="blue">&lt;</span>Tickets<span class="blue">&gt;</span> <span style="color: #57ac54;">To Treat</span></h1>
+  <button class="custom-btn btn-1" ><a href="createTicket.php"style="text-decoration: none; color:white;">Add Ticket</a></button> 
+</div>
+  <h1><span class="blue">&lt;</span>Tickets<span class="blue">&gt;</span> <span style="color: #57ac54;">To Treat</span></h1>
 <h2>Created with love by <a href="#" target="_blank">Hafsa</a></h2>
 
 <table class="container">    
@@ -82,9 +36,9 @@ $dataManager->closeConnection();
     </tbody>
 </table>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
 <script>
-    $('.btn-1').on('click', function() { // Corrected the button selector
+    $('.btn-1').on('click', function() { 
         var $this = $(this);
         $this.button('loading');
         setTimeout(function() {

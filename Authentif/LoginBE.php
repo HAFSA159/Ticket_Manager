@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     $password = $_POST["password"];
 
     $db = new Database();
-    $conn = $db->getConnection();
+    $conn = $db->connection;
 
     $query = "SELECT * FROM users WHERE email = ?";
     $stmt = $conn->prepare($query);
