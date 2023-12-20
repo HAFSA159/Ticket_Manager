@@ -31,8 +31,21 @@ class TicketManager {
         return mysqli_insert_id($this->db->connection);
     }
 
+    function getTags() {
+        $sql = "SELECT * FROM tags";
+        $stmt = $this->db->connection->prepare($sql);
+        $stmt->execute();
+    }
+
+    function addTag($ticket_id, $tag_id) {
+        $sql = "INSERT INTO tagticket (id_tag, id_ticket) VALUES ('$tag_id', '$ticket_id')";
+        $stmt = $this->db->connection->prepare($sql);
+        $stmt->execute();
+    }
+
     public function getAllData() {
-        $sql = "SELECT * FROM " . $this->ticketsTable;
+        $sql = "SELECT tickets.*, users.username FROM " . $this->ticketsTable . " 
+        JOIN users ON tickets.attribute_To=users.id_user";
         $result = $this->db->query($sql);
         $data = [];
 
@@ -63,8 +76,9 @@ class TicketManager {
             echo '<tr>';
             echo '<td>' . $row['titre'] . '</td>';
             echo '<td>' . $row['description'] . '</td>';
-            echo '<td>' . $row['attribute_To'] . '</td>';
+            echo '<td>' . $row['username'] . '</td>';
             echo '<td class="' . $this->getStatusColorClass($row['status']) . '">' . $row['status'] . '</td>';
+            echo '<td>' . $row['priority'] . '</td>';
             echo '<td>' . $row['priority'] . '</td>';
             echo '<td>' . $row['ticket_date'] . '</td>';
             echo '</tr>';
@@ -91,7 +105,8 @@ if (isset($_POST["submit"])) {
     $creator_id = $_SESSION["id"];
     $assign = $_POST["attribute_To"];
 
-    $dataManager->addTicket($titre, $description, $status, $priority, $ticket_date, $creator_id, $assign);
+    $ticket_id = $dataManager->addTicket($titre, $description, $status, $priority, $ticket_date, $creator_id, $assign);
+    $dataManager->addTag($ticket_id, $tag_id);
     header('Location: ../Views/tickets.php');
 }
 

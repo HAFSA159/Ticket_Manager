@@ -1,6 +1,5 @@
 <?php 
 include '../Authentif/TicketBE.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +28,7 @@ include '../Authentif/TicketBE.php';
             <th><h1>Attribute To</h1></th>
             <th><h1>Status</h1></th>
             <th><h1>Priority</h1></th>
+            <th><h1>tags</h1></th>
             <th><h1>Ticket Date</h1></th>
         </tr>
     </thead>

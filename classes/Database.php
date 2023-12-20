@@ -1,30 +1,56 @@
 
 <?php
 session_start();
-class Database {
+class Database
+{
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
     private $database = 'manager';
     public $connection;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->connection = new mysqli($this->host, $this->username, $this->password, $this->database);
 
         if ($this->connection->connect_error) {
             die("Connection failed: " . $this->connection->connect_error);
         }
+
     }
 
-    public function query($sql) {
+    function insertTags()
+    {
+        $sql = "INSERT INTO tags (libelle)
+        VALUES
+        ('Bug'),
+        ('Feature Request'),
+        ('Enhancement'),
+        ('Documentation'),
+        ('User Interface (UI)'),
+        ('User Experience (UX)'),
+        ('Performance'),
+        ('Security'),
+        ('Testing'),
+        ('Backend'),
+        ('Frontend'),
+        ('Accessibility')
+        ON DUPLICATE KEY UPDATE libelle = VALUES(libelle)";
+        $this->query($sql);
+    }
+
+    public function query($sql)
+    {
         return $this->connection->query($sql);
     }
 
-    function conn() {
+    function conn()
+    {
         return $this->connection;
     }
 
-    public function single($sql) {
+    public function single($sql)
+    {
         $result = $this->connection->query($sql);
 
         if ($result === false) {
@@ -39,7 +65,8 @@ class Database {
         return $row;
     }
 
-    public function resultSet($sql) {
+    public function resultSet($sql)
+    {
         $result = $this->connection->query($sql);
 
         if ($result === false) {
@@ -58,10 +85,8 @@ class Database {
         return $data;
     }
 
-    public function close() {
+    public function close()
+    {
         $this->connection->close();
     }
-    
-    
 }
-
