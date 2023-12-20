@@ -1,11 +1,10 @@
 <?php
-session_start();
+// session_start();
 include '../Authentif/TicketBE.php';
 
 if(!isset($_SESSION['id'])){
     header('location: login&signup.php');
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -40,21 +39,11 @@ if(!isset($_SESSION['id'])){
             <th><h1>Ticket Date</h1></th>
         </tr>
     </thead>
-    <tbody>
-        <?php $dataManager->displayDataInTable($data); ?>
+    <tbody id="tbody"> 
     </tbody>
 </table>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> 
-<script>
-    $('.btn-1').on('click', function() { 
-        var $this = $(this);
-        $this.button('loading');
-        setTimeout(function() {
-            $this.button('reset');
-        }, 8000);
-    });
-</script>
+<script src="../Public/style.js"></script>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
-     include_once 'Database.php';
+    include_once 'Database.php';
+    
     class Users extends Database {
         private $UserTable = 'users';
         private $sql;

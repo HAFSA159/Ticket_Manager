@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once "../classes/Users.php";
 
 class TicketManager {
@@ -107,7 +108,6 @@ class TicketManager {
                 echo " ";
                 echo $tag["libelle"];
                 echo " ";
-
             }
             echo ' </td>';
             echo '<td>' . $row['ticket_date'] . '</td>';

@@ -1,5 +1,9 @@
 <?php
 include '../Authentif/TicketBE.php';
+
+if(!isset($_SESSION['id'])){
+  header('location: login&signup.php');
+}
 ?>
 
 <!DOCTYPE html>
