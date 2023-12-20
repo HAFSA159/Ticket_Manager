@@ -1,5 +1,5 @@
 <?php
-require_once "../classes/Users.php";
+include '../Authentif/TicketBE.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +28,8 @@ require_once "../classes/Users.php";
       </div>
       <div class="relative inline-flex self-center">
         <select name="attribute_To" class="text-2xl font-bold rounded border-2 border-purple-700 text-black-600 h-14 w-60 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-          <?php foreach($users as $user) { ?>
-          <option value="<?= $user["id_user"] ?>"><?= $user["username"] ?></option>
+          <?php foreach ($users as $user) { ?>
+            <option value="<?= $user["id_user"] ?>" style="color: black;"><?= $user["username"] ?></option>
           <?php } ?>
         </select>
       </div>
@@ -51,6 +51,15 @@ require_once "../classes/Users.php";
           <option value="medium" style="background-color: orange;">>Medium</option>
           <option value="low" style="background-color: green;">>Low</option>
         </select>
+      </div>
+      <div>
+        <label style="color: white;">Tags</label>
+        <select name="tags[]" multiple>
+          <?php foreach ($tags as $tag) : ?>
+            <option value="<?= $tag["id_tag"] ?>" style="color: black;"><?= $tag["libelle"] ?></option>
+          <?php endforeach ?>
+        </select>
+
       </div>
       <div class="user-box">
         <label>Ticket Date</label>

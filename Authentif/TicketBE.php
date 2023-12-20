@@ -1,5 +1,5 @@
 <?php 
-include '../classes/Database.php';
+require_once "../classes/Users.php";
 
 class TicketManager {
     private $db;
@@ -35,6 +35,12 @@ class TicketManager {
         $sql = "SELECT * FROM tags";
         $stmt = $this->db->connection->prepare($sql);
         $stmt->execute();
+        $res = $stmt->get_result();
+        $tags = [];
+        while ($row = mysqli_fetch_assoc($res)) {
+            $tags[] = $row;
+        }
+        return $tags;
     }
 
     function addTag($ticket_id, $tag_id) {
@@ -54,9 +60,25 @@ class TicketManager {
                 $data[] = $row;
             }
         }
-
         return $data;
     }
+
+    public function getASpecificTags($ticket_id) {
+        $sql = "SELECT tickets.id_ticket, tags.* FROM tagticket 
+        JOIN tickets ON tagticket.id_ticket=tickets.id_ticket
+        JOIN tags ON tagticket.id_tag=tags.id_tag
+        WHERE tagticket.id_ticket='$ticket_id'";
+        $result = $this->db->query($sql);
+        $data = [];
+    
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+    
 
     public function getStatusColorClass($status) {
         switch ($status) {
@@ -79,7 +101,15 @@ class TicketManager {
             echo '<td>' . $row['username'] . '</td>';
             echo '<td class="' . $this->getStatusColorClass($row['status']) . '">' . $row['status'] . '</td>';
             echo '<td>' . $row['priority'] . '</td>';
-            echo '<td>' . $row['priority'] . '</td>';
+            echo '<td> ';
+            $specificTag = $this->getASpecificTags($row["id_ticket"]);
+            foreach($specificTag as $tag) {
+                echo " ";
+                echo $tag["libelle"];
+                echo " ";
+
+            }
+            echo ' </td>';
             echo '<td>' . $row['ticket_date'] . '</td>';
             echo '</tr>';
         }
@@ -96,6 +126,8 @@ class TicketManager {
 $dataManager = new TicketManager();
 $data = $dataManager->getAllData(); 
 
+$tags = $dataManager->getTags();
+
 if (isset($_POST["submit"])) {
     $titre = $_POST["titre"];
     $description = $_POST["description"];
@@ -104,9 +136,13 @@ if (isset($_POST["submit"])) {
     $ticket_date = $_POST["date"];
     $creator_id = $_SESSION["id"];
     $assign = $_POST["attribute_To"];
+    $tags = $_POST["tags"];
 
     $ticket_id = $dataManager->addTicket($titre, $description, $status, $priority, $ticket_date, $creator_id, $assign);
-    $dataManager->addTag($ticket_id, $tag_id);
+
+    foreach($tags as $tag) {
+        $dataManager->addTag($ticket_id, $tag);
+    }
     header('Location: ../Views/tickets.php');
 }
 
