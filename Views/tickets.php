@@ -5,6 +5,8 @@ include '../Authentif/TicketBE.php';
 if(!isset($_SESSION['id'])){
     header('location: login&signup.php');
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +23,7 @@ if(!isset($_SESSION['id'])){
 
 <div class="frame">
   <button class="custom-btn btn-1" ><a href="createTicket.php"style="text-decoration: none; color:white;">Add Ticket</a></button> 
+  <button class="custom-btn btn-1" ><a href="../Authentif/Logout.php"style="text-decoration: none; color:white;">Logout</a></button> 
 </div>
   <h1><span class="blue">&lt;</span>Tickets<span class="blue">&gt;</span> <span style="color: #57ac54;">To Treat</span></h1>
 <h2>Created with love by <a href="#" target="_blank">Hafsa</a></h2>
