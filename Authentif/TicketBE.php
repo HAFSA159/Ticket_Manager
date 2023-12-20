@@ -94,6 +94,38 @@ class TicketManager {
         }
     }
 
+    private function filterTitle($title)
+    {
+        return htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+    }
+
+    public function getFilteredData($filterTitle)
+    {
+    $filterTitle = $this->filterTitle($filterTitle); 
+    $sql = "SELECT tickets.*, users.username FROM " . $this->ticketsTable . " 
+            JOIN users ON tickets.attribute_To=users.id_user
+            WHERE tickets.titre LIKE ?";
+
+    $stmt = $this->db->connection->prepare($sql);
+
+    if ($stmt === false) {
+        return false;
+    }
+    $stmt->bind_param("s", $filterTitle);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    $data = [];
+
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    $stmt->close();
+    return $data;
+    }
+
+
     public function displayDataInTable($data) {
         foreach ($data as $row) {
             echo '<tr>';
@@ -112,6 +144,7 @@ class TicketManager {
             echo ' </td>';
             echo '<td>' . $row['ticket_date'] . '</td>';
             echo '</tr>';
+            
         }
     }
    

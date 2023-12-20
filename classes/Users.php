@@ -28,14 +28,26 @@
             mysqli_stmt_execute($stmt);
         }
     
-        public function updateUser() {
-    
+        public function updateTicket() {
+                $sql = "UPDATE tickets SET titre = ? WHERE id_ticket = ?";
+        
+                if ($this->conn->query($sql) === TRUE) {
+                    return "User updated successfully";
+                } else {
+                    return "Error updating user: " . $this->conn->error;
+                }
         }
     
-        public function deleteUser() {
-    
+        public function deleteTicket() {  
+                $sql = "DELETE FROM tickets WHERE id = ?";
+        
+                if ($this->conn->query($sql) === TRUE) {
+                    return "User deleted successfully";
+                } else {
+                    return "Error deleting user: " . $this->conn->error;
+                }
+            }
         }
-    }
 
     $db = new Database();
     $user = new Users();
