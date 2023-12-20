@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 class Database {
     private $host = 'localhost';
     private $username = 'root';
@@ -17,6 +18,44 @@ class Database {
 
     public function query($sql) {
         return $this->connection->query($sql);
+    }
+
+    function conn() {
+        return $this->connection;
+    }
+
+    public function single($sql) {
+        $result = $this->connection->query($sql);
+
+        if ($result === false) {
+            // Handle error, e.g., return false or throw an exception
+            return false;
+        }
+
+        $row = $result->fetch_assoc();
+
+        $result->close(); // Close the result set
+
+        return $row;
+    }
+
+    public function resultSet($sql) {
+        $result = $this->connection->query($sql);
+
+        if ($result === false) {
+            // Handle error, e.g., return false or throw an exception
+            return false;
+        }
+
+        $data = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        $result->close(); // Close the result set
+
+        return $data;
     }
 
     public function close() {

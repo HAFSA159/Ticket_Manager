@@ -9,34 +9,26 @@ class TicketManager {
         $this->db = new Database();
     }
 
-    public function addTicket($titre, $description, $status, $priority, $ticket_date) {
-        $sql = "INSERT INTO " . $this->ticketsTable . " (titre, description, status, priority, ticket_date)
-        VALUES (?, ?, ?, ?, ?)";
+    public function addTicket($titre, $description, $status, $priority, $ticket_date, $creator_id, $assign) {
+        $sql = "INSERT INTO " . $this->ticketsTable . " (titre, description, status, priority, ticket_date, attribute_To, creator)
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        // Prepare the SQL statement
         $stmt = $this->db->connection->prepare($sql);
 
         if ($stmt === false) {
-            // Handle error, e.g., return false or throw an exception
             return false;
         }
+        $stmt->bind_param("sssssii", $titre, $description, $status, $priority, $ticket_date, $assign, $creator_id);
 
-        // Bind parameters to the prepared statement
-        $stmt->bind_param("sssss", $titre, $description, $status, $priority, $ticket_date);
-
-        // Execute the statement
         $result = $stmt->execute();
 
-        // Check for success
         if ($result === false) {
-            // Handle error, e.g., return false or throw an exception
             return false;
         }
 
-        // Close the statement
         $stmt->close();
 
-        return true;
+        return mysqli_insert_id($this->db->connection);
     }
 
     public function getAllData() {
@@ -88,9 +80,20 @@ class TicketManager {
 }
 
 $dataManager = new TicketManager();
-// $dataManager->getAllData(); 
+$data = $dataManager->getAllData(); 
 
-header('../Views/tickets.php');
+if (isset($_POST["submit"])) {
+    $titre = $_POST["titre"];
+    $description = $_POST["description"];
+    $status = $_POST["status"];
+    $priority = $_POST["priority"];
+    $ticket_date = $_POST["date"];
+    $creator_id = $_SESSION["id"];
+    $assign = $_POST["attribute_To"];
+
+    $dataManager->addTicket($titre, $description, $status, $priority, $ticket_date, $creator_id, $assign);
+    header('Location: ../Views/tickets.php');
+}
 
 ?>
 

@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 include '../classes/Database.php';
 
 if (isset($_POST['submit'])) {
@@ -21,7 +19,7 @@ if (isset($_POST['submit'])) {
 
         if (password_verify($password, $user['password'])) {
 
-            $_SESSION["id"] = $user['id'];
+            $_SESSION["id"] = $user['id_user'];
             $_SESSION["email"] = $user['email'];
 
             header('location: ../Views/tickets.php');
