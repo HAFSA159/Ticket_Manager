@@ -1,6 +1,5 @@
-
 <?php
-session_start();
+
 class Database
 {
     private $host = 'localhost';
@@ -18,7 +17,6 @@ class Database
         }
 
     }
-
     function insertTags()
     {
         $sql = "INSERT INTO tags (libelle)
